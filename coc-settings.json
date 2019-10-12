@@ -1,0 +1,14 @@
+ {   "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "c:/work/tmp/ccls"
+         }
+       }
+    }
+  }
+  }
+
