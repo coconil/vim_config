@@ -9,6 +9,13 @@
          }
        }
     }
-  }
+  },
+  "list.insertMappings": {
+  "<C-n>": "normal:j",
+  "<C-p>": "normal:k",
+},
+  "list.normalMappings": {
+  "q": "do:exit",
+},
   }
 

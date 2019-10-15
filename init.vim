@@ -7,19 +7,26 @@ Plug 'Shougo/denite.nvim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'liuchengxu/space-vim-dark'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 call plug#end()
 
 :let mapleader = " "
 nmap <silent><leader>ld <Plug>(coc-definition)
 nmap <silent><leader>lr <Plug>(coc-reference)
-nmap <silent><leader>lf <Plug>(coc-format-selected)
+map <silent><leader>lf <Plug>(coc-format-selected)
 nmap <silent><leader>le <Plug>(coc-diagnostic-next)
 nmap <silent><leader>lF <Plug>(coc-fix-current)
+" nmap <silent><leader>ll <Plug>(coc-list-outline)
+nmap <silent><leader>ll :CocList -A outline<CR>
 
 nmap <silent><leader>bd :bd<CR>
 nmap <silent><leader>bs :Denite buffer<CR>
 nmap <silent><leader>ff :Denite file/rec<CR>
+nmap <silent><leader>wl <C-w>l
+nmap <silent><leader>wk <C-w>k
+nmap <silent><leader>wj <C-w>j
+nmap <silent><leader>wh <C-w>h
 
 " nmap <leader>lR <Plug>(coc-refactor)
 nnoremap <silent><leader>ft :Defx -split=vertical -winwidth=25 -direction=topleft <CR>
@@ -95,6 +102,7 @@ function! DefxSmartH(_)
   endif
 endfunction
 
+let g:airline_theme='onedark'
 
 
 
