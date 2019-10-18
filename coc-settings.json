@@ -5,7 +5,7 @@
       "rootPatterns": [".ccls"],
       "initializationOptions": {
          "cache": {
-           "directory": "c:/work/tmp/ccls"
+           "directory": "/tmp/ccls"
          }
        }
     }
@@ -17,5 +17,6 @@
   "list.normalMappings": {
   "q": "do:exit",
 },
+"suggest.noselect": false,
   }
 

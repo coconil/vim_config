@@ -19,6 +19,8 @@ nmap <silent><leader>le <Plug>(coc-diagnostic-next)
 nmap <silent><leader>lF <Plug>(coc-fix-current)
 " nmap <silent><leader>ll <Plug>(coc-list-outline)
 nmap <silent><leader>ll :CocList -A outline<CR>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 nmap <silent><leader>bd :bd<CR>
 nmap <silent><leader>bs :Denite buffer<CR>
