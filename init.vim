@@ -9,6 +9,7 @@ Plug 'liuchengxu/space-vim-dark'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
+Plug 'Raimondi/delimitMate'
 call plug#end()
 
 :let mapleader = " "
