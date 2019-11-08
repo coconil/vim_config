@@ -84,8 +84,11 @@ endfunction
 
 function! DefxSmartL(_)
   if defx#is_directory()
-    call defx#call_action('open_tree')
-    normal! j
+    if defx#is_opened_tree()
+       call defx#call_action('close_tree')
+    else 
+       call defx#call_action('open_tree')
+    endif
   else
     call defx#call_action('drop')
   endif
