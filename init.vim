@@ -84,11 +84,7 @@ endfunction
 
 function! DefxSmartL(_)
   if defx#is_directory()
-    if defx#is_opened_tree()
-       call defx#call_action('close_tree')
-    else 
-       call defx#call_action('open_tree')
-    endif
+       call defx#call_action('open_or_close_tree')
   else
     call defx#call_action('drop')
   endif
@@ -97,15 +93,9 @@ endfunction
 function! DefxSmartH(_)
   " if cursor line is first line, or in empty dir
   if line('.') ==# 1 || line('$') ==# 1
-    return defx#call_action('cd', ['..'])
+  return defx#call_action('cd', ['..'])
   endif
-
-  " candidate is opend tree?
-  if defx#is_opened_tree()
-    return defx#call_action('close_tree')
-  else 
-  call defx#call_action('close_tree')
-  endif
+  return defx#call_action('close_tree')
 endfunction
 
 let g:airline_theme='onedark'
