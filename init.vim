@@ -13,9 +13,12 @@ Plug 'Raimondi/delimitMate'
 call plug#end()
 
 :let mapleader = " "
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
 nmap <silent><leader>ld <Plug>(coc-definition)
 nmap <silent><leader>lr <Plug>(coc-reference)
-map <silent><leader>lf <Plug>(coc-format-selected)
+map <silent><leader>lf <Plug>(coc-format)
 nmap <silent><leader>le <Plug>(coc-diagnostic-next)
 nmap <silent><leader>lF <Plug>(coc-fix-current)
 " nmap <silent><leader>ll <Plug>(coc-list-outline)
@@ -24,6 +27,8 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 nmap <silent><leader>bd :bd<CR>
+nmap <silent><leader>bp :bp<CR>
+nmap <silent><leader>bn :bn<CR>
 nmap <silent><leader>bs :Denite buffer<CR>
 nmap <silent><leader>ff :Denite file/rec<CR>
 nmap <silent><leader>wl <C-w>l
