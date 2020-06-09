@@ -16,11 +16,15 @@ call plug#end()
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
-nmap <silent><leader>ld <Plug>(coc-definition)
-nmap <silent><leader>lr <Plug>(coc-reference)
-map <silent><leader>lf <Plug>(coc-format)
-nmap <silent><leader>le <Plug>(coc-diagnostic-next)
-nmap <silent><leader>lF <Plug>(coc-fix-current)
+nmap <silent><leader>gd <Plug>(coc-definition)
+nmap <silent><leader>gD <Plug>(coc-declaration)
+nmap <silent><leader>gr <Plug>(coc-reference)
+
+nmap <silent><leader>lr <Plug>(coc-rename)
+
+nmap <silent><leader>en <Plug>(coc-diagnostic-next)
+nmap <silent><leader>ep <Plug>(coc-diagnostic-prev)
+nmap <silent><leader>ef <Plug>(coc-fix-current)
 " nmap <silent><leader>ll <Plug>(coc-list-outline)
 nmap <silent><leader>ll :CocList -A outline<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -30,6 +34,9 @@ nmap <silent><leader>bd :bd<CR>
 nmap <silent><leader>bp :bp<CR>
 nmap <silent><leader>bn :bn<CR>
 nmap <silent><leader>bs :Denite buffer<CR>
+nmap <silent><leader>bF <Plug>(coc-format)
+vmap <silent><leader>bf <Plug>(coc-format-selected)
+
 nmap <silent><leader>ff :Denite file/rec<CR>
 nmap <silent><leader>wl <C-w>l
 nmap <silent><leader>wk <C-w>k
