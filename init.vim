@@ -10,6 +10,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 Plug 'Raimondi/delimitMate'
+Plug 'lambdalisue/gina.vim'
 call plug#end()
 
 :let mapleader = " "
@@ -42,6 +43,13 @@ nmap <silent><leader>wl <C-w>l
 nmap <silent><leader>wk <C-w>k
 nmap <silent><leader>wj <C-w>j
 nmap <silent><leader>wh <C-w>h
+nnoremap <silent><leader>w- :split<CR>
+nnoremap <silent><leader>w\ :vsplit<CR>
+nnoremap <silent><leader>wd :close<CR>
+nnoremap <silent><leader>wo :only<CR>
+
+nnoremap <silent><leader>gl :Gina log<CR>
+nnoremap <silent><leader>gs :Gina status<CR>
 
 " nmap <leader>lR <Plug>(coc-refactor)
 nnoremap <silent><leader>ft :Defx -split=vertical -winwidth=25 -direction=topleft <CR>
