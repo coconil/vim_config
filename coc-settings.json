@@ -12,5 +12,7 @@
   "q": "do:exit",
 },
 "suggest.noselect": false,
+"suggest.enablePreselect": true,
+"coc.preferences.colorSupport": true,
   }
 
