@@ -11,9 +11,21 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 Plug 'Raimondi/delimitMate'
 Plug 'lambdalisue/gina.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
 call plug#end()
 
 :let mapleader = " "
+
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_project_root = ['.root']
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_auto_add_gtags_cscope = 0
+
+noremap <silent> <leader>fs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>fc :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>fT :GscopeFind t <C-R><C-W><cr>
+
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
@@ -26,7 +38,8 @@ nmap <silent><leader>lr <Plug>(coc-rename)
 nmap <silent><leader>en <Plug>(coc-diagnostic-next)
 nmap <silent><leader>ep <Plug>(coc-diagnostic-prev)
 nmap <silent><leader>ef <Plug>(coc-fix-current)
-" nmap <silent><leader>ll <Plug>(coc-list-outline)
+nmap <silent><leader>el <Plug>(coc-list-diagnostic)
+
 nmap <silent><leader>ll :CocList -A outline<CR>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
