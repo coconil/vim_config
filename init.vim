@@ -27,14 +27,13 @@ if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
 endif
 
-let g:gutentags_project_root = ['.root']
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-let g:gutentags_auto_add_gtags_cscope = 0
-
-noremap <silent> <leader>fs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>fd :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>fr :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>fc :GscopeFind c <C-R><C-W><cr>
 noremap <silent> <leader>fT :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>ff :Leaderf file<C-R><C-W><cr>
+noremap <silent> <leader>ff :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>fi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>fa :GscopeFind a<C-R><C-W><cr>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
@@ -75,7 +74,6 @@ nmap <silent><leader>bs :Denite buffer<CR>
 nmap <silent><leader>bF <Plug>(coc-format)
 vmap <silent><leader>bf <Plug>(coc-format-selected)
 
-nmap <silent><leader>ff :Denite file/rec<CR>
 nmap <silent><leader>wl <C-w>l
 nmap <silent><leader>wk <C-w>k
 nmap <silent><leader>wj <C-w>j
@@ -164,5 +162,10 @@ let g:vista#renderer#enable_icon = 1
 set statusline+=%{NearestMethodOrFunction()}
 " autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
-
+let g:gutentags_project_root = []
+let g:gutentags_project_root = ['compile_flags.txt','.ccls','compile_commands.json']
+let g:gutentags_exclude_project_root = ['.git']
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_auto_add_gtags_cscope = 0
+let g:gutentags_add_default_project_roots = 0
 
