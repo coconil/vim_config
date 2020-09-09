@@ -13,11 +13,20 @@ Plug 'Raimondi/delimitMate'
 Plug 'lambdalisue/gina.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
+Plug 'liuchengxu/vista.vim'
+Plug 'Yggdroot/LeaderF'
 call plug#end()
 
 :let mapleader = " "
 
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_modules = []
+if executable('ctags')
+	let g:gutentags_modules += ['ctags']
+endif
+if executable('gtags-cscope') && executable('gtags')
+	let g:gutentags_modules += ['gtags_cscope']
+endif
+
 let g:gutentags_project_root = ['.root']
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_auto_add_gtags_cscope = 0
@@ -25,7 +34,7 @@ let g:gutentags_auto_add_gtags_cscope = 0
 noremap <silent> <leader>fs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>fc :GscopeFind c <C-R><C-W><cr>
 noremap <silent> <leader>fT :GscopeFind t <C-R><C-W><cr>
-
+noremap <silent> <leader>ff :Leaderf file<C-R><C-W><cr>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
@@ -40,7 +49,12 @@ nmap <silent><leader>ep <Plug>(coc-diagnostic-prev)
 nmap <silent><leader>ef <Plug>(coc-fix-current)
 nmap <silent><leader>el <Plug>(coc-list-diagnostic)
 
-nmap <silent><leader>ll :CocList -A outline<CR>
+nmap <silent><leader>gL :CocList -A outline<CR>
+nmap <silent><leader>gl :Leaderf bufTag<CR>
+
+nmap <silent><leader>ll :Vista coc<CR>
+nmap <silent><leader>lL :Vista<CR>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -71,7 +85,7 @@ nnoremap <silent><leader>w\ :vsplit<CR>
 nnoremap <silent><leader>wd :close<CR>
 nnoremap <silent><leader>wo :only<CR>
 
-nnoremap <silent><leader>gl :Gina log<CR>
+nnoremap <silent><leader>gh :Gina log<CR>
 nnoremap <silent><leader>gs :Gina status<CR>
 
 " nmap <leader>lR <Plug>(coc-refactor)
@@ -143,7 +157,12 @@ endfunction
 
 let g:airline_theme='onedark'
 
-
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+let g:vista#renderer#enable_icon = 1
+set statusline+=%{NearestMethodOrFunction()}
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 
 
