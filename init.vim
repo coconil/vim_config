@@ -27,6 +27,9 @@ if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
 endif
 
+let g:Lf_ShortcutF = '<leader>fF'
+let g:Lf_ShortcutB = '<leader>bS'
+
 noremap <silent> <leader>fd :GscopeFind g <C-R><C-W><cr>
 noremap <silent> <leader>fr :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>fc :GscopeFind c <C-R><C-W><cr>
@@ -46,7 +49,7 @@ nmap <silent><leader>lr <Plug>(coc-rename)
 nmap <silent><leader>en <Plug>(coc-diagnostic-next)
 nmap <silent><leader>ep <Plug>(coc-diagnostic-prev)
 nmap <silent><leader>ef <Plug>(coc-fix-current)
-nmap <silent><leader>el <Plug>(coc-list-diagnostic)
+nmap <silent><leader>el :CocList diagnostics<CR>
 
 nmap <silent><leader>gL :CocList -A outline<CR>
 nmap <silent><leader>gl :Leaderf bufTag<CR>
@@ -73,6 +76,7 @@ nmap <silent><leader>bn :bn<CR>
 nmap <silent><leader>bs :Denite buffer<CR>
 nmap <silent><leader>bF <Plug>(coc-format)
 vmap <silent><leader>bf <Plug>(coc-format-selected)
+
 
 nmap <silent><leader>wl <C-w>l
 nmap <silent><leader>wk <C-w>k
