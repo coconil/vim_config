@@ -135,6 +135,7 @@ function! s:defx_my_setting()
         \ defx#do_action('quit')
   nnoremap <silent><buffer><expr> h defx#do_action('call', 'DefxSmartH')
   nnoremap <silent><buffer><expr> l defx#do_action('call', 'DefxSmartL')
+   nnoremap <silent><buffer><expr> s defx#do_action('call','DefxSmartS')
   nnoremap <silent><buffer><expr> <Cr> defx#do_action('call', 'DefxSmartL')
   nnoremap <silent><buffer><expr> R defx#do_action('call', 'DefxChangeRoot')
 endfunction
@@ -142,6 +143,10 @@ endfunction
 function! DefxChangeRoot(_)
 let filepath = defx#get_candidate()['action__path']
 return defx#call_action('cd', [filepath])
+endfunction
+
+function! DefxSmartS(_)
+return defx#call_action('toggle_ignored_files')
 endfunction
 
 function! DefxSmartL(_)
