@@ -51,6 +51,9 @@ nmap <silent><leader>ep <Plug>(coc-diagnostic-prev)
 nmap <silent><leader>ef <Plug>(coc-fix-current)
 nmap <silent><leader>el :CocList diagnostics<CR>
 
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
+
 nmap <silent><leader>gL :CocList -A outline<CR>
 nmap <silent><leader>gl :Leaderf bufTag<CR>
 
