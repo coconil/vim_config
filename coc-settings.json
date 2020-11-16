@@ -52,7 +52,11 @@
   ],
   "explorer.keyMappings.global": {
     "i": false, // cancel default mapkey
-    "<cr>": ["expanded?", "collapse", "expand"],
+    "<cr>":  [
+      "expandable?",
+      ["expanded?", "collapse", "expand"],
+      "open"
+    ],
     "l": ["expandable?", "cd", "open"],
     "h": "gotoParent",
     "J": ["toggleSelection", "nodeNext"],

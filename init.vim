@@ -33,14 +33,14 @@ let g:Lf_ShortcutB = '<leader>bS'
 noremap <silent> <leader>fd :GscopeFind g <C-R><C-W><cr>
 noremap <silent> <leader>fr :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>fc :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>fT :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>fs :GscopeFind t <C-R><C-W><cr>
 noremap <silent> <leader>ff :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <leader>fi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <leader>fa :GscopeFind a<C-R><C-W><cr>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
-nmap <silent><leader>fe :CocCommand explorer<CR>
+nmap <silent><leader>ft :CocCommand explorer<CR>
 
 nmap <silent><leader>gd <Plug>(coc-definition)
 nmap <silent><leader>gD <Plug>(coc-declaration)
@@ -96,7 +96,7 @@ nnoremap <silent><leader>gh :Gina log<CR>
 nnoremap <silent><leader>gs :Gina status<CR>
 
 " nmap <leader>lR <Plug>(coc-refactor)
-nnoremap <silent><leader>ft :Defx -split=vertical -winwidth=25 -direction=topleft <CR>
+nnoremap <silent><leader>fT :Defx -split=vertical -winwidth=25 -direction=topleft <CR>
 
 
 colorscheme space-vim-dark
