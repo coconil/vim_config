@@ -50,4 +50,35 @@
     "USART",
     "oled"
   ],
+  "explorer.keyMappings.global": {
+    "i": false, // cancel default mapkey
+    "<cr>": ["expanded?", "collapse", "expand"],
+    "l": ["expandable?", "cd", "open"],
+    "h": "gotoParent",
+    "J": ["toggleSelection", "nodeNext"],
+    "K": ["toggleSelection", "nodePrev"],
+    "gl": "expandRecursive",
+    "gh": "collapseRecursive",
+    "s": "open:split",
+    "S": "open:split:plain",
+    "E": "open:vsplit",
+    "t": "open:tab",    
+    "gp": "preview:labeling",
+
+    "y": "copyFilepath",
+    "Y": "copyFilename",
+
+    "a": "addFile",
+    "A": "addDirectory",
+    "r": "rename",
+
+    ".": "toggleHidden",
+
+    "?": "help",
+    "q": "quit",
+    "<esc>": "esc",
+
+    "f": "search",
+    "F": "searchRecursive",
+  }
 }

@@ -40,6 +40,8 @@ noremap <silent> <leader>fa :GscopeFind a<C-R><C-W><cr>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
+nmap <silent><leader>fe :CocCommand explorer<CR>
+
 nmap <silent><leader>gd <Plug>(coc-definition)
 nmap <silent><leader>gD <Plug>(coc-declaration)
 nmap <silent><leader>gr <Plug>(coc-reference)
