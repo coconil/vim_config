@@ -136,7 +136,7 @@ function! s:defx_my_setting()
   nnoremap <silent><buffer><expr> h defx#do_action('call', 'DefxSmartH')
   nnoremap <silent><buffer><expr> l defx#do_action('call', 'DefxSmartL')
    nnoremap <silent><buffer><expr> s defx#do_action('call','DefxSmartS')
-  nnoremap <silent><buffer><expr> <Cr> defx#do_action('call', 'DefxSmartL')
+  nnoremap <silent><buffer><expr> <Cr> defx#do_action('call', 'DefxSmartEnter')
   nnoremap <silent><buffer><expr> R defx#do_action('call', 'DefxChangeRoot')
 endfunction
 
@@ -151,6 +151,13 @@ endfunction
 
 function! DefxSmartL(_)
   if defx#is_directory()
+    let filepath = defx#get_candidate()['action__path']
+    return defx#call_action('cd', [filepath])
+  endif
+endfunction
+
+function! DefxSmartEnter(_)
+  if defx#is_directory()
        call defx#call_action('open_or_close_tree')
   else
     call defx#call_action('drop')
@@ -158,11 +165,7 @@ function! DefxSmartL(_)
 endfunction
 
 function! DefxSmartH(_)
-  " if cursor line is first line, or in empty dir
-  if line('.') ==# 1 || line('$') ==# 1
   return defx#call_action('cd', ['..'])
-  endif
-  return defx#call_action('close_tree')
 endfunction
 
 let g:airline_theme='onedark'
