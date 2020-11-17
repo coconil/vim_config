@@ -186,3 +186,4 @@ let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_add_default_project_roots = 0
 
+let g:coc_global_extensions = ['coc-json','coc-git','coc-cmake','coc-explorer','coc-python','coc-spell-checker','coc-terminal','coc-word','coc-clangd','coc-omnisharp','coc-sh']
