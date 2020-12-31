@@ -39,14 +39,19 @@
     "GPIOB",
     "GPIOC",
     "GPIOD",
+    "RTCM",
     "RXNE",
     "STDBY",
     "USART",
+    "chdir",
     "flrc",
     "gfsk",
+    "hcdc",
     "htobe",
     "oled",
-    "rssi"
+    "rpos",
+    "rssi",
+    "wpos"
   ],
   "explorer.keyMappings.global": {
     "i": false, // cancel default mapkey
