@@ -15,6 +15,9 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'liuchengxu/vista.vim'
 Plug 'Yggdroot/LeaderF'
+Plug 'Yggdroot/indentLine'
+Plug 'crusoexia/vim-monokai'
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 :let mapleader = " "
@@ -79,7 +82,7 @@ nmap <silent><leader>bd :bd<CR>
 nmap <silent><leader>bp :bp<CR>
 nmap <silent><leader>bn :bn<CR>
 nmap <silent><leader>bs :Denite buffer<CR>
-nmap <silent><leader>bF <Plug>(coc-format)
+nmap <silent><leader>bf <Plug>(coc-format)
 vmap <silent><leader>bf <Plug>(coc-format-selected)
 
 
