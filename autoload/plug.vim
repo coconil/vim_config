@@ -12,11 +12,11 @@
 "
 "   " Make sure you use single quotes
 "
-"   " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+"   " Shorthand notation; fetches https://ghproxy.com/https://github.com/junegunn/vim-easy-align
 "   Plug 'junegunn/vim-easy-align'
 "
 "   " Any valid git URL is allowed
-"   Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+"   Plug 'https://ghproxy.com/https://github.com/junegunn/vim-github-dashboard.git'
 "
 "   " Multiple Plug commands can be written in a single line using | separators
 "   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -58,7 +58,7 @@
 "| `for`                   | On-demand loading: File types                    |
 "| `frozen`                | Do not update unless explicitly specified        |
 "
-" More information: https://github.com/junegunn/vim-plug
+" More information: https://ghproxy.com/https://github.com/junegunn/vim-plug
 "
 "
 " Copyright (c) 2017 Junegunn Choi
@@ -92,7 +92,7 @@ let g:loaded_plug = 1
 let s:cpo_save = &cpo
 set cpo&vim
 
-let s:plug_src = 'https://github.com/junegunn/vim-plug.git'
+let s:plug_src = 'https://ghproxy.com/https://github.com/junegunn/vim-plug.git'
 let s:plug_tab = get(s:, 'plug_tab', -1)
 let s:plug_buf = get(s:, 'plug_buf', -1)
 let s:mac_gui = has('gui_macvim') && has('gui_running')
@@ -242,8 +242,6 @@ function! plug#begin(...)
     let home = s:path(s:plug_fnamemodify(s:plug_expand(a:1), ':p'))
   elseif exists('g:plug_home')
     let home = s:path(g:plug_home)
-  elseif has('nvim')
-    let home = stdpath('data') . '/plugged'
   elseif !empty(&rtp)
     let home = s:path(split(&rtp, ',')[0]) . '/plugged'
   else
@@ -352,7 +350,7 @@ function! plug#end()
   endif
   let lod = { 'ft': {}, 'map': {}, 'cmd': {} }
 
-  if get(g:, 'did_load_filetypes', 0)
+  if exists('g:did_load_filetypes')
     filetype off
   endif
   for name in g:plugs_order
@@ -407,7 +405,7 @@ function! plug#end()
 
   for [map, names] in items(lod.map)
     for [mode, map_prefix, key_prefix] in
-          \ [['i', '<C-\><C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
+          \ [['i', '<C-O>', ''], ['n', '', ''], ['v', '', 'gv'], ['o', '', '']]
       execute printf(
       \ '%snoremap <silent> %s %s:<C-U>call <SID>lod_map(%s, %s, %s, "%s")<CR>',
       \ mode, map, map_prefix, string(map), string(names), mode != 'i', key_prefix)
@@ -775,7 +773,7 @@ function! s:infer_properties(name, repo)
       if repo !~ '/'
         throw printf('Invalid argument: %s (implicit `vim-scripts'' expansion is deprecated)', repo)
       endif
-      let fmt = get(g:, 'plug_url_format', 'https://git::@github.com/%s.git')
+      let fmt = get(g:, 'plug_url_format', 'https://git::@ghproxy.com/https://github.com/%s.git')
       let uri = printf(fmt, repo)
     endif
     return { 'dir': s:dirpath(g:plug_home.'/'.a:name), 'uri': uri }
@@ -1171,7 +1169,7 @@ function! s:update_impl(pull, force, args) abort
     let $GIT_TERMINAL_PROMPT = 0
     for plug in values(todo)
       let plug.uri = substitute(plug.uri,
-            \ '^https://git::@github\.com', 'https://github.com', '')
+            \ '^https://git::@github\.com', 'https://ghproxy.com/https://github.com', '')
     endfor
   endif
 
@@ -1210,8 +1208,7 @@ function! s:update_impl(pull, force, args) abort
   normal! 2G
   silent! redraw
 
-  " Set remote name, overriding a possible user git config's clone.defaultRemoteName
-  let s:clone_opt = ['--origin', 'origin']
+  let s:clone_opt = []
   if get(g:, 'plug_shallow', 1)
     call extend(s:clone_opt, ['--depth', '1'])
     if s:git_version_requirement(1, 7, 10)
@@ -2248,8 +2245,8 @@ endfunction
 
 function! s:compare_git_uri(a, b)
   " See `git help clone'
-  " https:// [user@] github.com[:port] / junegunn/vim-plug [.git]
-  "          [git@]  github.com[:port] : junegunn/vim-plug [.git]
+  " https:// [user@] ghproxy.com/https://github.com[:port] / junegunn/vim-plug [.git]
+  "          [git@]  ghproxy.com/https://github.com[:port] : junegunn/vim-plug [.git]
   " file://                            / junegunn/vim-plug        [/]
   "                                    / junegunn/vim-plug        [/]
   let pat = '^\%(\w\+://\)\='.'\%([^@/]*@\)\='.'\([^:/]*\%(:[0-9]*\)\=\)'.'[:/]'.'\(.\{-}\)'.'\%(\.git\)\=/\?$'
@@ -2621,34 +2618,26 @@ function! s:preview_commit()
 
   let sha = matchstr(getline('.'), '^  \X*\zs[0-9a-f]\{7,9}')
   if empty(sha)
-    let name = matchstr(getline('.'), '^- \zs[^:]*\ze:$')
-    if empty(name)
-      return
-    endif
-    let title = 'HEAD@{1}..'
-    let command = 'git diff --no-color HEAD@{1}'
-  else
-    let title = sha
-    let command = 'git show --no-color --pretty=medium '.sha
-    let name = s:find_name(line('.'))
+    return
   endif
 
+  let name = s:find_name(line('.'))
   if empty(name) || !has_key(g:plugs, name) || !isdirectory(g:plugs[name].dir)
     return
   endif
 
   if exists('g:plug_pwindow') && !s:is_preview_window_open()
     execute g:plug_pwindow
-    execute 'e' title
+    execute 'e' sha
   else
-    execute 'pedit' title
+    execute 'pedit' sha
     wincmd P
   endif
-  setlocal previewwindow filetype=git buftype=nofile bufhidden=wipe nobuflisted modifiable
+  setlocal previewwindow filetype=git buftype=nofile nobuflisted modifiable
   let batchfile = ''
   try
     let [sh, shellcmdflag, shrd] = s:chsh(1)
-    let cmd = 'cd '.plug#shellescape(g:plugs[name].dir).' && '.command
+    let cmd = 'cd '.plug#shellescape(g:plugs[name].dir).' && git show --no-color --pretty=medium '.sha
     if s:is_win
       let [batchfile, cmd] = s:batchfile(cmd)
     endif
@@ -2774,9 +2763,9 @@ function! s:snapshot(force, ...) abort
   1
   let anchor = line('$') - 3
   let names = sort(keys(filter(copy(g:plugs),
-        \'has_key(v:val, "uri") && isdirectory(v:val.dir)')))
+        \'has_key(v:val, "uri") && !has_key(v:val, "commit") && isdirectory(v:val.dir)')))
   for name in reverse(names)
-    let sha = has_key(g:plugs[name], 'commit') ? g:plugs[name].commit : s:git_revision(g:plugs[name].dir)
+    let sha = s:git_revision(g:plugs[name].dir)
     if !empty(sha)
       call append(anchor, printf("silent! let g:plugs['%s'].commit = '%s'", name, sha))
       redraw
