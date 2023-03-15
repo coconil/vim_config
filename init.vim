@@ -13,6 +13,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'lambdalisue/gina.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
+Plug 'ellisonleao/gruvbox.nvim'
 Plug 'liuchengxu/vista.vim'
 Plug 'Yggdroot/LeaderF'
 Plug 'Yggdroot/indentLine'
@@ -21,6 +22,7 @@ Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 :let mapleader = " "
+let g:coc_disable_startup_warning=1
 
 let g:gutentags_modules = []
 if executable('ctags')
@@ -103,6 +105,7 @@ nnoremap <silent><leader>fT :Defx -split=vertical -winwidth=25 -direction=toplef
 
 
 colorscheme space-vim-dark
+" colorscheme gruvbox
 set number
 set guifont=Source\ Code\ Variable:h12
 
